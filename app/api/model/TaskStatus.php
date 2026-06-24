@@ -2,9 +2,9 @@
 
 namespace app\api\model;
 
-use think\Model;
+use app\api\BaseModel;
 
-class TaskStatus extends Model
+class TaskStatus extends BaseModel
 {
 
 }

@@ -2,9 +2,10 @@
 
 namespace app\api\model;
 
+
 use app\api\BaseModel;
 
-class TaskNode extends BaseModel
+class CategoryType extends BaseModel
 {
 
 }
