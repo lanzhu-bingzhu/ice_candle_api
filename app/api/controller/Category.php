@@ -15,4 +15,9 @@ class Category
         $data = $this->model->getList($parent_id);
         return json(['code' => 200, 'message' => 'success', 'data' => $data]);
     }
+
+    public function read($id) {
+        $data = $this->model->getDetali($id);
+        return json(['code' => 200, 'message' => 'success', 'data' => $data]);
+    }
 }
