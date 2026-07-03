@@ -17,7 +17,7 @@ class Category
     }
 
     public function read($id) {
-        $data = $this->model->getDetali($id);
+        $data = $this->model->getDetail($id);
         return json(['code' => 200, 'message' => 'success', 'data' => $data]);
     }
 }
