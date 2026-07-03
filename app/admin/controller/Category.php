@@ -48,7 +48,7 @@ class Category extends BaseController
 
     public function getAllCategory()
     {
-        $data = $this->model->select();
+        $data = $this->model->where('type_id', 1)->select();
         foreach ($data as $key => $value) {
             $data[$key]['type'] = CategoryType::where('category_type_id', $value['type_id'])->value('name');
         }
