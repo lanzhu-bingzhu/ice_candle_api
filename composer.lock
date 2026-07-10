@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c73e22d0e3c34a2f8f77e0a9326d117",
+    "content-hash": "10a3c8c67e6f57f9c2a6b915e52495f1",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -588,16 +588,16 @@
         },
         {
             "name": "topthink/think-filesystem",
-            "version": "v1.0.3",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-filesystem.git",
-                "reference": "29f19f140a9267c717fecd7ccb22c84c2d72382e"
+                "reference": "e8e51adb9f3a3f3aac2aa3ef73b7b439100f777d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-filesystem/zipball/29f19f140a9267c717fecd7ccb22c84c2d72382e",
-                "reference": "29f19f140a9267c717fecd7ccb22c84c2d72382e",
+                "url": "https://api.github.com/repos/top-think/think-filesystem/zipball/e8e51adb9f3a3f3aac2aa3ef73b7b439100f777d",
+                "reference": "e8e51adb9f3a3f3aac2aa3ef73b7b439100f777d",
                 "shasum": ""
             },
             "require": {
@@ -630,9 +630,9 @@
             "description": "The ThinkPHP6.1 Filesystem Package",
             "support": {
                 "issues": "https://github.com/top-think/think-filesystem/issues",
-                "source": "https://github.com/top-think/think-filesystem/tree/v1.0.3"
+                "source": "https://github.com/top-think/think-filesystem/tree/v2.0.3"
             },
-            "time": "2023-02-08T01:25:15+00:00"
+            "time": "2024-10-16T03:37:24+00:00"
         },
         {
             "name": "topthink/think-helper",

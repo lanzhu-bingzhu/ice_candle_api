@@ -33,12 +33,19 @@ class Category extends BaseController
 
     public function save()
     {
-
+        $parameter = $this->getParameter();
+        $data = $this->model->addData($parameter);
+        return $this->successResponse($data);
     }
 
     public function update($id)
     {
-
+        if (!$id) {
+            return $this->failResponse();
+        }
+        $parameter = $this->getParameter();
+        $data = $this->model->editData($id, $parameter);
+        return $this->successResponse($data);
     }
 
     public function delete($id)
@@ -53,5 +60,15 @@ class Category extends BaseController
             $data[$key]['type'] = CategoryType::where('category_type_id', $value['type_id'])->value('name');
         }
         return $this->successResponse(['items' => $data, 'count' => count($data)]);
+    }
+
+    public function getParameter()
+    {
+        return [
+            'name' => input('name'),
+            'parent_id' => input('parent_id'),
+            'type_id' => input('type_id'),
+            'description' => input('description'),
+        ];
     }
 }

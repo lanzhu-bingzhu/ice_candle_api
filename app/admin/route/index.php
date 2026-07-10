@@ -9,3 +9,4 @@ Route::resource('category', 'Category');
 Route::resource('user', 'User');
 Route::resource('task', 'Task');
 Route::resource('floor', 'Floor');
+Route::resource('upload', 'Upload');

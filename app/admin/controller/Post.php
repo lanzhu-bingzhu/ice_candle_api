@@ -32,16 +32,40 @@ class Post extends BaseController
 
     public function save()
     {
-        return $this->successResponse();
+        $parameter = $this->getParameter();
+        $data = $this->model->addData($parameter);
+        return $this->successResponse($data);
     }
 
     public function update($id)
     {
-        return $this->successResponse();
+        if (!$id) {
+            return $this->failResponse();
+        }
+        $parameter = $this->getParameter();
+        $data = $this->model->editData($id, $parameter);
+        return $this->successResponse($data);
     }
 
     public function delete($id)
     {
-        return $this->successResponse();
+        $res = $this->model->where($this->model->getPk(), $id)->delete();
+        return $this->successResponse($res);
+    }
+
+    public function getParameter()
+    {
+        return [
+            'category_id' => input('category_id'),
+            'title' => input('title'),
+            'type_id' => input('type_id'),
+            'summary' => input('summary', ''),
+            'cover' => input('cover', ''),
+            'author' => input('author', ''),
+            'avatar' => input('avatar', ''),
+            'content' => input('content', ''),
+            'description' => input('description', ''),
+            'images' => input('images', []),
+        ];
     }
 }

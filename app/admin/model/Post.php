@@ -30,7 +30,65 @@ class Post extends BaseModel
 
     public function getDetail($id)
     {
-        $data = $this->where('post_id', $id)->find();
+        $data = $this->where($this->pk, $id)->find();
+        $data['images'] = PostMedia::where('post_id', $id)->column('src');
         return $data;
+    }
+
+    public function addData($data)
+    {
+        try {
+            $images = $data['images'] ?? [];
+            $data['created_at'] = time();
+            unset($data['images']);
+
+            $model = self::create($data);
+            if ($images) {
+                $post_media_model = new PostMedia();
+                $post_media = [];
+                foreach ($images as $key => $value) {
+                    $post_media[] = [
+                        'post_id' => $model->post_id,
+                        'src' => $value,
+                        'created_at' => time()
+                    ];
+                }
+                $post_media_model->saveAll($post_media);
+            }
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public function editData($id, $data)
+    {
+        try {
+            $images = $data['images'] ?? [];
+            $data['updated_at'] = time();
+            unset($data['images']);
+
+            $res = $this->where($this->pk, $id)->save($data);
+            if (!$res) {
+                return false;
+            }
+
+            PostMedia::where('post_id', $id)->delete();
+            if ($images) {
+                $post_media_model = new PostMedia();
+                $post_media = [];
+                foreach ($images as $key => $value) {
+                    $post_media[] = [
+                        'post_id' => $id,
+                        'src' => $value,
+                        'created_at' => time()
+                    ];
+                }
+                $post_media_model->saveAll($post_media);
+            }
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

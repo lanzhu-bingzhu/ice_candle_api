@@ -4,19 +4,29 @@ namespace app\admin\model;
 
 use app\admin\BaseModel;
 
-class Task extends BaseModel
+class Floor extends BaseModel
 {
-    protected $pk = 'task_id';
+    protected $pk = 'floor_id';
+
+    public function floorType()
+    {
+        return $this->hasOne('FloorType', 'floor_type_id', 'type_id');
+    }
+
+    public function category()
+    {
+        return $this->hasOne('Category', 'category_id', 'category_id');
+    }
 
     public function getList($where = [], $limit = 10, $page = 1)
     {
-        $data = $this->where($where)->page($page, $limit)->select();
+        $data = $this->with(['floor_type', 'category'])->where($where)->page($page, $limit)->select();
         return $data;
     }
 
-    public function getListCount()
+    public function getListCount($where = [])
     {
-        $data = $this->count();
+        $data = $this->where($where)->count();
         return $data;
     }
 
