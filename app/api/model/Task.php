@@ -12,7 +12,7 @@ class Task extends BaseModel
     }
 
     public function getList() {
-        $data = $this->select();
+        $data = $this->where('is_show', 1)->select();
         foreach ($data as $key => $value) {
             $data[$key]['deadline'] = $value['deadline'] ? date('Y-m-d H:i:s', $value['deadline']) : null;
         }
@@ -22,6 +22,7 @@ class Task extends BaseModel
     public function getDetali($name) {
         $data = $this->alias('t')
             ->with(['task_nodes'])
+            ->where('is_show', 1)
             ->where('t.name', $name)
             ->find();
         if (!$data) {

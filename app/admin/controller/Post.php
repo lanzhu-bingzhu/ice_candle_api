@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\admin\BaseController;
+use app\admin\model\PostMedia;
 use think\App;
 
 class Post extends BaseController
@@ -50,6 +51,9 @@ class Post extends BaseController
     public function delete($id)
     {
         $res = $this->model->where($this->model->getPk(), $id)->delete();
+        if ($res) {
+            PostMedia::where($this->model->getPk(), $id)->delete();
+        }
         return $this->successResponse($res);
     }
 
@@ -66,6 +70,7 @@ class Post extends BaseController
             'content' => input('content', ''),
             'description' => input('description', ''),
             'images' => input('images', []),
+            'tags' => input('tags', []),
         ];
     }
 }

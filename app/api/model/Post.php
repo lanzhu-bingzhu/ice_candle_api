@@ -13,7 +13,7 @@ class Post extends BaseModel
     }
 
     public function getList($where) {
-        $data = $this->with(['tags'])->where($where)->select();
+        $data = $this->with(['tags'])->where($where)->where('is_show', 1)->select();
         foreach ($data as $key => $value) {
             $data[$key]['type'] = PostType::where('post_type_id', $value['type_id'])->value('name');
             $data[$key]['images'] = PostMedia::where('post_id', $value['post_id'])->column('src');
@@ -22,7 +22,7 @@ class Post extends BaseModel
     }
 
     public function getDetail($id) {
-        $data = $this->with(['tags'])->where('post_id', $id)->find();
+        $data = $this->with(['tags'])->where('post_id', $id)->where('is_show', 1)->find();
         $data['type'] = PostType::where('post_type_id', $data['type_id'])->value('name');
         $data['images'] = PostMedia::where('post_id', $data['post_id'])->column('src');
         return $data;

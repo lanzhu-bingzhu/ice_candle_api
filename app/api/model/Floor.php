@@ -7,7 +7,7 @@ use app\api\BaseModel;
 class Floor extends BaseModel
 {
     public function getFloor() {
-        $data = $this->order('sort', 'desc')->select();
+        $data = $this->where('is_show', 1)->order('sort', 'desc')->select();
         foreach ($data as $key => $value) {
             $category = Category::where('category_id', $value['category_id'])->find();
             $data[$key]['category_id'] = $category['category_id'];

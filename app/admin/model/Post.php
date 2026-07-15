@@ -32,6 +32,7 @@ class Post extends BaseModel
     {
         $data = $this->where($this->pk, $id)->find();
         $data['images'] = PostMedia::where('post_id', $id)->column('src');
+        $data['tags'] = PostTagAssociate::where('post_id', $id)->column('post_tag_id');
         return $data;
     }
 
@@ -39,8 +40,10 @@ class Post extends BaseModel
     {
         try {
             $images = $data['images'] ?? [];
+            $tags = $data['tags'] ?? [];
             $data['created_at'] = time();
             unset($data['images']);
+            unset($data['tags']);
 
             $model = self::create($data);
             if ($images) {
@@ -55,6 +58,18 @@ class Post extends BaseModel
                 }
                 $post_media_model->saveAll($post_media);
             }
+
+            if ($tags) {
+                $post_tag_associate_model = new PostTagAssociate();
+                $post_tag_associate = [];
+                foreach ($tags as $key => $value) {
+                    $post_tag_associate[] = [
+                        'post_id' => $model->post_id,
+                        'post_tag_id' => $value
+                    ];
+                }
+                $post_tag_associate_model->saveAll($post_tag_associate);
+            }
             return true;
         } catch (\Exception $e) {
             return false;
@@ -65,8 +80,10 @@ class Post extends BaseModel
     {
         try {
             $images = $data['images'] ?? [];
+            $tags = $data['tags'] ?? [];
             $data['updated_at'] = time();
             unset($data['images']);
+            unset($data['tags']);
 
             $res = $this->where($this->pk, $id)->save($data);
             if (!$res) {
@@ -85,6 +102,19 @@ class Post extends BaseModel
                     ];
                 }
                 $post_media_model->saveAll($post_media);
+            }
+
+            PostTagAssociate::where('post_id', $id)->delete();
+            if ($tags) {
+                $post_tag_associate_model = new PostTagAssociate();
+                $post_tag_associate = [];
+                foreach ($tags as $key => $value) {
+                    $post_tag_associate[] = [
+                        'post_id' => $id,
+                        'post_tag_id' => $value
+                    ];
+                }
+                $post_tag_associate_model->saveAll($post_tag_associate);
             }
             return true;
         } catch (\Exception $e) {

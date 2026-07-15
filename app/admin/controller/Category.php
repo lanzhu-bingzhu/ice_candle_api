@@ -50,12 +50,13 @@ class Category extends BaseController
 
     public function delete($id)
     {
-
+        $res = $this->model->where($this->model->getPk(), $id)->delete();
+        return $this->successResponse($res);
     }
 
     public function getAllCategory()
     {
-        $data = $this->model->where('type_id', 1)->select();
+        $data = $this->model->select();
         foreach ($data as $key => $value) {
             $data[$key]['type'] = CategoryType::where('category_type_id', $value['type_id'])->value('name');
         }
