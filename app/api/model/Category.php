@@ -6,6 +6,11 @@ use app\api\BaseModel;
 
 class Category extends BaseModel
 {
+    public function children()
+    {
+        return $this->hasMany('Category', 'parent_id', 'category_id');
+    }
+
     public function getList($parent_id = 0) {
         $data = $this->where('parent_id', $parent_id)->where('is_show', 1)->select();
         foreach ($data as $key => $value) {

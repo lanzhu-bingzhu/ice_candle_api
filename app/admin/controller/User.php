@@ -30,6 +30,22 @@ class User extends BaseController
         return $this->successResponse();
     }
 
+    public function resetPassword()
+    {
+        $username = input('username');
+        $password = input('password');
+        if (!$username || !$password) {
+            return $this->failResponse(500, '参数不足');
+        }
+        $admin = $this->model->where('username', $username)->find();
+        if ($admin) {
+            $admin->password = $this->generateHashPassword($password);
+            $admin->updated_at = time();
+            $admin->save();
+        }
+        return $this->successResponse();
+    }
+
     public function generateHashPassword($password)
     {
         return password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);

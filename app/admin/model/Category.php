@@ -33,12 +33,20 @@ class Category extends BaseModel
     public function addData($data)
     {
         $data['created_at'] = time();
-        return $this->save($data);
+        $model = self::create($data);
+        if (!$model) {
+            return false;
+        }
+        return $model->category_id;
     }
 
     public function editData($id, $data)
     {
         $data['updated_at'] = time();
-        return $this->where($this->pk, $id)->save($data);
+        $res = $this->where($this->pk, $id)->save($data);
+        if (!$res) {
+            return false;
+        }
+        return $id;
     }
 }

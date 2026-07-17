@@ -38,11 +38,21 @@ class Floor extends BaseModel
 
     public function addData($data)
     {
-        return $this->save($data);
+        $data['created_at'] = time();
+        $model = self::create($data);
+        if (!$model) {
+            return false;
+        }
+        return $model->floor_id;
     }
 
     public function editData($id, $data)
     {
-        return $this->where($this->pk, $id)->save($data);
+        $data['updated_at'] = time();
+        $res = $this->where($this->pk, $id)->save($data);
+        if (!$res) {
+            return false;
+        }
+        return $id;
     }
 }

@@ -27,6 +27,6 @@ class Auth extends BaseController
         ];
         $token = JWT::encode($payload, $this->secret, 'HS256');
 
-        return $this->successResponse(['token' => $token]);
+        return $this->successResponse(['token' => $token, 'user' => ['id' => $admin->admin_id, 'name' => $admin->username]]);
     }
 }

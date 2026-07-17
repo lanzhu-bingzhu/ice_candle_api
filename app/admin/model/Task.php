@@ -58,7 +58,7 @@ class Task extends BaseModel
                 }
                 $task_node_model->saveAll($nodes);
             }
-            return true;
+            return $model->task_id;
         } catch (\Exception $exception) {
             return false;
         }
@@ -96,7 +96,7 @@ class Task extends BaseModel
                 }
                 $task_node_model->saveAll($nodes);
             }
-            return true;
+            return $id;
         } catch (\Exception $exception) {
             return false;
         }

@@ -70,7 +70,7 @@ class Post extends BaseModel
                 }
                 $post_tag_associate_model->saveAll($post_tag_associate);
             }
-            return true;
+            return $model->post_id;
         } catch (\Exception $e) {
             return false;
         }
@@ -116,7 +116,7 @@ class Post extends BaseModel
                 }
                 $post_tag_associate_model->saveAll($post_tag_associate);
             }
-            return true;
+            return $id;
         } catch (\Exception $e) {
             return false;
         }
