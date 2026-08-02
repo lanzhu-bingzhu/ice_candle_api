@@ -25,7 +25,7 @@ class Category extends BaseModel
         if ($category_id) {
             $map[] = ['category_id', '=', $category_id];
         }
-        if ($parent_id) {
+        if ($parent_id !== false) {
             $map[] = ['parent_id', '=', $parent_id];
         }
         return $map;

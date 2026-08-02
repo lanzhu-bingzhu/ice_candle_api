@@ -12,7 +12,7 @@ class Category
 
     public function index() {
         $category_id = input('category_id', '');
-        $parent_id = input('parent_id', 0);
+        $parent_id = input('parent_id', false);
         $data = $this->model->getList($category_id, $parent_id);
         return json(['code' => 200, 'message' => 'success', 'data' => $data]);
     }
