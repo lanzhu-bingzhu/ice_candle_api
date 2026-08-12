@@ -23,6 +23,9 @@ class Post extends BaseModel
 
     public function getDetail($id) {
         $data = $this->with(['tags'])->where('post_id', $id)->where('is_show', 1)->find();
+        if (!$data) {
+            return false;
+        }
         $data['type'] = PostType::where('post_type_id', $data['type_id'])->value('name');
         $data['images'] = PostMedia::where('post_id', $data['post_id'])->column('src');
         return $data;
