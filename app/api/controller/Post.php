@@ -10,7 +10,9 @@ class Post
         $this->model = new \app\api\model\Post();
     }
 
-    public function index($category_id) {
+    public function index() {
+        $category_id = input('category_id', false);
+
         $where = [];
         if ($category_id) {
             $where[] = ['category_id', '=', $category_id];

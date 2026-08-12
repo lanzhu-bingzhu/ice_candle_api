@@ -11,8 +11,9 @@ class Category
     }
 
     public function index() {
-        $parent_id = input('param.parent_id', 0);
-        $data = $this->model->getList($parent_id);
+        $category_id = input('category_id', '');
+        $parent_id = input('parent_id', false);
+        $data = $this->model->getList($category_id, $parent_id);
         return json(['code' => 200, 'message' => 'success', 'data' => $data]);
     }
 
