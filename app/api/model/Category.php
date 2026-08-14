@@ -20,7 +20,8 @@ class Category extends BaseModel
         return $data;
     }
 
-    public function getMap($category_id, $parent_id = 0) {
+    public function getMap($category_id, $parent_id = 0): array
+    {
         $map = [];
         if ($category_id) {
             $map[] = ['category_id', '=', $category_id];

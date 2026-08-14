@@ -30,4 +30,20 @@ class Post extends BaseModel
         $data['images'] = PostMedia::where('post_id', $data['post_id'])->column('src');
         return $data;
     }
+
+    public function getCategoryAllChildrenId($category_id) {
+        $category_list = Category::where('parent_id', $category_id)->select();
+
+        $category_ids = [];
+        if ($category_list) {
+            $category_ids = array_values(array_column($category_list->toArray(), 'category_id'));
+        }
+
+        $_temp = [];
+        foreach ($category_list as $key => $value) {
+            $_temp = $this->getCategoryAllChildrenId($value['category_id']);
+        }
+
+        return array_merge($_temp, $category_ids);
+    }
 }
