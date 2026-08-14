@@ -62,7 +62,7 @@ class Floor extends BaseController
             'link' => input('link', ''),
             'alt' => input('alt', ''),
             'sort' => input('sort', 0),
-            'is_show' => input('is_show', 1),
+            'is_show' => input('is_show', 0),
         ];
     }
 }

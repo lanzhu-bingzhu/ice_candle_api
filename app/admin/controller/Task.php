@@ -62,6 +62,7 @@ class Task extends BaseController
         return [
             'name' => input('name', ''),
             'title' => input('title', ''),
+            'is_show' => input('is_show', 0),
             'overall_description' => input('overall_description', ''),
             'header_image' => input('header_image', ''),
             'deadline' => input('deadline', ''),

@@ -63,6 +63,7 @@ class Post extends BaseController
             'category_id' => input('category_id'),
             'title' => input('title'),
             'type_id' => input('type_id'),
+            'is_show' => input('is_show', 0),
             'summary' => input('summary', ''),
             'cover' => input('cover', ''),
             'author' => input('author', ''),
