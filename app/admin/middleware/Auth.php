@@ -20,7 +20,7 @@ class Auth
 
         $token = $request->header('Authorization');
         if (!$token) {
-            return json(['code' => 401, 'message' => '未授权']);
+            return json(['code' => 401, 'message' => '未授权'], 401);
         }
         $token = str_replace('Bearer ', '', $token);
         try {
@@ -28,7 +28,7 @@ class Auth
             $request->token = $info;
             return $next($request);
         } catch (\Exception $e) {
-            return json(['code' => 401, 'message' => '权限错误']);
+            return json(['code' => 401, 'message' => '权限错误'], 401);
         }
     }
 }
