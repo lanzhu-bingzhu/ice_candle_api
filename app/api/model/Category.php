@@ -34,7 +34,9 @@ class Category extends BaseModel
 
     public function getDetail($id) {
         $data = $this->where('category_id', $id)->where('is_show', 1)->find();
-        $data['type'] = CategoryType::where('category_type_id', $data['type_id'])->value('name');
+        if ($data) {
+            $data['type'] = CategoryType::where('category_type_id', $data['type_id'])->value('name');
+        }
         return $data;
     }
 }
