@@ -15,7 +15,9 @@ class Post
 
         $where = [];
         if ($category_id) {
-            $where[] = ['category_id', '=', $category_id];
+            $category_ids = $this->model->getCategoryAllChildrenId($category_id);
+            $category_ids[] = $category_id;
+            $where[] = ['category_id', 'in', $category_ids];
         }
         $data = $this->model->getList($where);
         return json(['code' => 200, 'message' => 'success', 'data' => $data]);

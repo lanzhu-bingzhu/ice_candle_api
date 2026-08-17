@@ -20,7 +20,8 @@ class Category extends BaseModel
         return $data;
     }
 
-    public function getMap($category_id, $parent_id = 0) {
+    public function getMap($category_id, $parent_id = 0): array
+    {
         $map = [];
         if ($category_id) {
             $map[] = ['category_id', '=', $category_id];
@@ -33,7 +34,9 @@ class Category extends BaseModel
 
     public function getDetail($id) {
         $data = $this->where('category_id', $id)->where('is_show', 1)->find();
-        $data['type'] = CategoryType::where('category_type_id', $data['type_id'])->value('name');
+        if ($data) {
+            $data['type'] = CategoryType::where('category_type_id', $data['type_id'])->value('name');
+        }
         return $data;
     }
 }

@@ -69,6 +69,7 @@ class Category extends BaseController
             'name' => input('name'),
             'parent_id' => input('parent_id', 0),
             'type_id' => input('type_id'),
+            'is_show' => input('is_show', 0),
             'description' => input('description'),
         ];
     }
