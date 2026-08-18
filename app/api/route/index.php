@@ -11,3 +11,5 @@ Route::rule('v1/floor', 'Floor/index', 'GET');
 
 Route::rule('v1/post/:id', 'Post/read', 'GET');
 Route::rule('v1/post', 'Post/index', 'GET');
+
+Route::rule('v1/config', 'Configuration/index', 'GET');
