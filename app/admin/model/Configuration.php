@@ -10,10 +10,10 @@ class Configuration extends BaseModel
 
     public function getList($where = [])
     {
-        $data = $this->where($where)->select();
+        $data = $this->where($where)->column('value', 'name');
         foreach ($data as $key => $value) {
-            if ('recommendations_image' == $value['name']) {
-                $data[$key]['value'] = json_decode($value['value'], true);
+            if (in_array($key, ['recommendations_image', 'recommendations_content'])) {
+                $data[$key] = json_decode($value, true);
             }
         }
         return $data;
@@ -28,7 +28,7 @@ class Configuration extends BaseModel
     public function addData($data)
     {
         foreach ($data as $key => $val) {
-            if ('recommendations_image' == $key) {
+            if (in_array($key, ['recommendations_image', 'recommendations_content'])) {
                 $_temp = [
                     'name' => $key,
                     'value' => json_encode($val),
@@ -39,6 +39,7 @@ class Configuration extends BaseModel
                     'value' => $val
                 ];
             }
+
             $config = $this->where('name', $key)->find();
             if ($config) {
                 $this->where('name', $key)->update($_temp);

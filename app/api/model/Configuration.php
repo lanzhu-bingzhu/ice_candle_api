@@ -12,6 +12,9 @@ class Configuration extends BaseModel
         if ($data['recommendations_image']) {
             $data['recommendations_image'] = json_decode($data['recommendations_image'], true);
         }
+        if ($data['recommendations_content']) {
+            $data['recommendations_content'] = json_decode($data['recommendations_content'], true);
+        }
         return $data;
     }
 }

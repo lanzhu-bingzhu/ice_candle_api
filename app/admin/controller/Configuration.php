@@ -33,6 +33,7 @@ class Configuration extends BaseController
             'header_image' => input('header_image', ''),
             'navigation_image' => input('navigation_image'),
             'recommendations_image' => input('recommendations_image', []),
+            'recommendations_content' => input('recommendations_content', []),
             'introduction_image' => input('introduction_image', ''),
             'introduction_text' => input('introduction_text', ''),
         ];
